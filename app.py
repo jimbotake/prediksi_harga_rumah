@@ -13,7 +13,7 @@ def get_connection():
         host="localhost",
         database="prediksi_db",
         user="postgres",
-        password="Humaira31814"
+        password="yourpassword"
     )
 
 # Decorator untuk proteksi route agar harus login
