@@ -52,6 +52,10 @@ Aplikasi web sederhana menggunakan Flask untuk memprediksi harga rumah berdasark
    ```cpp
    http://127.0.0.1:5000/
    ```
+## Tampilan Aplikasi
+![Tampilan Aplikasi](images/dashboard.png)
+![Tampilan Aplikasi](images/prediksi.png)
+![Tampilan Aplikasi](images/history.png)
 
 ## Strktur Database (PostgreSQL)
    - users: Menyimpan data pengguna (id, username, password)
