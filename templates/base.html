@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}Dashboard{% endblock %}</title>
+  <title>{% block title %}Prediksi Harga Rumah{% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
@@ -34,6 +34,13 @@
       <a href="{{ url_for('logout') }}">Logout</a>
     </div>
     <div class="flex-fill p-4">
+
+      <!-- Header judul aplikasi -->
+      <header class="mb-4">
+        <h1>Prediksi Harga Rumah</h1>
+        <hr />
+      </header>
+
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
