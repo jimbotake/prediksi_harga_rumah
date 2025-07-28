@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <h2>Selamat Datang, {{ username }}</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Total Prediksi</h5>
+          <p class="card-text fs-4">{{ stats.total }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rata-rata Harga</h5>
+          <p class="card-text fs-4">Rp {{ "{:,.0f}".format(stats.avg_price) }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-warning mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rata-rata Luas</h5>
+          <p class="card-text fs-4">{{ stats.avg_luas }} m²</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-bg-info mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rata-rata Usia</h5>
+          <p class="card-text fs-4">{{ stats.avg_usia }} tahun</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h4>Grafik Harga Prediksi</h4>
+    <canvas id="chartPrediksi" height="100"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('chartPrediksi').getContext('2d');
+    const labels = {{ (chart_data|map(attribute=0)|list) if chart_data else [] }};
+    const dataPoints = {{ (chart_data|map(attribute=1)|list) if chart_data else [] }};
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Harga Prediksi',
+          data: dataPoints,
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return 'Rp ' + value.toLocaleString();
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return 'Rp ' + context.parsed.y.toLocaleString();
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}

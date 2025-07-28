@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grafik Harga Rumah</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h2>Grafik Harga Rumah</h2>
+<canvas id="lineChart" width="400" height="200"></canvas>
+<canvas id="barChart" width="400" height="200"></canvas>
+<a href="/">← Kembali</a>
+
+<script>
+    const usia = {{ usia|safe }};
+    const harga = {{ harga|safe }};
+    const kamar = {{ kamar|safe }};
+    const avg_harga = {{ avg_harga|safe }};
+
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: usia,
+            datasets: [{
+                label: 'Harga vs Usia',
+                data: harga
+            }]
+        }
+    });
+
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: kamar,
+            datasets: [{
+                label: 'Rata-rata Harga per Kamar',
+                data: avg_harga
+            }]
+        }
+    });
+</script>
+</body>
+</html>

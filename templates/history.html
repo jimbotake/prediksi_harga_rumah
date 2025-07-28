@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Riwayat{% endblock %}
+{% block content %}
+  <h2>Riwayat Prediksi</h2>
+  {% if data %}
+    <table class="table table-striped mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Luas (m²)</th>
+          <th>Jumlah Kamar</th>
+          <th>Usia Bangunan</th>
+          <th>Harga</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>Rp {{ "{:,.0f}".format(row[4]) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-info mt-4">Belum ada data prediksi.</div>
+  {% endif %}
+{% endblock %}
