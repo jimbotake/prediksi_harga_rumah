@@ -8,7 +8,7 @@ conn = psycopg2.connect(
     host="localhost",
     database="prediksi_db",
     user="postgres",
-    password="Humaira31814"
+    password="yourpassword"
 )
 
 # Ambil data dari DB
